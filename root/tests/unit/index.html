@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{%= title %} Tests</title>
+</head>
+<body class="yui3-skin-sam">
+<div id="logger"></div>
+
+<script src="../../../../build/yui/yui.js"></script>
+<!-- <script src="/build/yui/yui.js"></script> -->
+<script src="./assets/{%= name %}-test.js"></script>
+<script>
+YUI({
+    coverage: ['{%= name %}'],
+    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+}).use('test-console', '{%= name %}-test', function (Y) {
+    (new Y.Test.Console()).render('#logger');
+
+    Y.Test.Runner.setName('{%= title %}');
+    Y.Test.Runner.run();
+});
+</script>
+</body>
+</html>

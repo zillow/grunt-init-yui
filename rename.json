@@ -1,0 +1,22 @@
+{
+    "_project/.gitignore"  : ".gitignore",
+    "_project/.travis.yml" : ".travis.yml",
+    "_project/.yeti.json"  : ".yeti.json",
+    "_project/BUILD.md"    : "BUILD.md",
+    "_project/Gruntfile.js": "Gruntfile.js",
+    "_project/README.md"   : "README.md",
+
+    "HISTORY.md"                            : "src/{%= name %}/HISTORY.md",
+    "README.md"                             : "src/{%= name %}/README.md",
+    "build.json"                            : "src/{%= name %}/build.json",
+    "docs/component.json"                   : "src/{%= name %}/docs/component.json",
+    "docs/index.mustache"                   : "src/{%= name %}/docs/index.mustache",
+    "js/name.js"                            : "src/{%= name %}/js/{%= name %}.js",
+    "css/name.css"                          : "src/{%= name %}/css/{%= name %}.css",
+    "meta/name.json"                        : "src/{%= name %}/meta/{%= name %}.json",
+    "assets/name/skins/sam/name-skin.css"   : "src/{%= name %}/assets/{%= name %}/skins/sam/{%= name %}-skin.css",
+    "assets/name/skins/night/name-skin.css" : "src/{%= name %}/assets/{%= name %}/skins/night/{%= name %}-skin.css",
+    "assets/name/name-core.css"             : "src/{%= name %}/assets/{%= name %}/{%= name %}-core.css",
+    "tests/unit/index.html"                 : "src/{%= name %}/tests/unit/index.html",
+    "tests/unit/assets/name-test.js"        : "src/{%= name %}/tests/unit/assets/{%= name %}-test.js"
+}

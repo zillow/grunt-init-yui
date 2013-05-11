@@ -1,0 +1,11 @@
+{
+    "name"       : "{%= name %}",
+    "displayName": "{%= title %}",
+    "description": "{%= description %}",
+    "author"     : [ "{%= author_name %}" ],
+    "use"        : [ "{%= name %}" ],
+
+    "tags": [],
+
+    "examples": []
+}
