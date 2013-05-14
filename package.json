@@ -23,7 +23,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "grunt-init": "~0.2.0",
+    "grunt-init": "git://github.com/evocateur/grunt-init.git#yui",
     "nopt": "~2.1.1"
   },
   "devDependencies": {
