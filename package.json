@@ -23,6 +23,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
+    "grunt-init": "~0.2.0",
     "nopt": "~2.1.1"
   }
 }
