@@ -21,5 +21,8 @@
   ],
   "author": "Daniel Stockman <daniel.stockman@gmail.com>",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "nopt": "~2.1.1"
+  }
 }
