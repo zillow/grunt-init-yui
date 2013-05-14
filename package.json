@@ -4,7 +4,7 @@
   "description": "Create a YUI module with grunt-init.",
   "main": "template.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,10 @@
   "dependencies": {
     "grunt-init": "~0.2.0",
     "nopt": "~2.1.1"
+  },
+  "devDependencies": {
+    "should": "~1.2.2",
+    "mocha": "~1.9.0"
   },
   "peerDependencies": {
     "grunt-cli": "~0.1.8"
