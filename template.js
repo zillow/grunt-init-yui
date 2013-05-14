@@ -65,8 +65,11 @@ exports.template = function (grunt, init, done) {
     // --gallery
     var needsGallery = grunt.option('gallery');
 
-    // --project (or absence of Gruntfile.js)
-    var needsProject = grunt.option('project');
+    // --project
+    var projectOnly  = grunt.option('project');
+
+    // Gruntfile.js is missing
+    var needsProject = projectOnly || grunt.file.expand('Gruntfile.js').length === 0;
 
     function wrapDefault(oldKey, newKey, metaObj) {
         metaObj.name = newKey;
@@ -284,7 +287,9 @@ exports.template = function (grunt, init, done) {
     if (needsProject) {
         templatePrompts = getProjectPrompts();
     }
-    templatePrompts = templatePrompts.concat(getModulePrompts());
+    if (!projectOnly) {
+        templatePrompts = templatePrompts.concat(getModulePrompts());
+    }
 
 
     // Gets the ball rolling, finally.
@@ -292,7 +297,10 @@ exports.template = function (grunt, init, done) {
         if (needsProject) {
             addProjectProperties(props);
         }
-        addModuleProperties(props);
+
+        if (!projectOnly) {
+            addModuleProperties(props);
+        }
 
         // Files to copy (and process).
         var files = init.filesToCopy(props);
