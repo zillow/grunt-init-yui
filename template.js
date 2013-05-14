@@ -12,27 +12,40 @@
 exports.description = 'Create a YUI module, including YUITest unit tests and Istanbul code coverage.';
 
 // Template-specific notes to be displayed before question prompts.
-var notes = module.notes = [];
-// exports.notes = '_Project name_ should not contain "jquery" or "js" and ' +
-//     'should be a unique ID not already in use at plugins.jquery.com. _Project ' +
-//     'title_ should be a human-readable title, and doesn\'t need to contain ' +
-//     'the word "jQuery", although it may. For example, a plugin titled "Awesome ' +
-//     'Plugin" might have the name "awesome-plugin".' +
-//     '\n\n' +
-//     'For more information, please see the following documentation:' +
-//     '\n\n' +
-//     'Naming Your Plugin      http://plugins.jquery.com/docs/names/\n' +
-//     'Publishing Your Plugin  http://plugins.jquery.com/docs/publish/\n' +
-//     'Package Manifest        http://plugins.jquery.com/docs/package-manifest/';
+module.notes = [];
+
+var moduleNotes = [
+    '_Module name_ should be a unique ID not already in use at http://yuilibrary.com/gallery/show .',
+    '_Module title_ should be a human-readable title, and doesn\'t need to contain the word "Gallery", although it may.',
+    'For example, a module titled "Awesome Module" might have the name "awesome-module".',
+    ''
+];
+
+var projectNotes = [
+    '_Project name_ should be a unique ID, but defaulting to the current directory is likely fine.',
+    '_Project title_ should be a human-readable title, and should probably describe the project.',
+    'For example, a project titled "Awesome Project" might have the name "awesome-project".',
+    ''
+];
+
+var moreInfoNotes = [
+    'For more information, please see the following documentation:',
+    '',
+    'YUI Library             http://yuilibrary.com/',
+    'build.json Reference    http://yui.github.io/shifter/#build.json',
+    'YUI Gallery Tutorial    http://yuilibrary.com/yui/docs/tutorials/gallery/'
+];
 
 // Template-specific notes to be displayed after question prompts.
-var after = module.after = [];
-// exports.after = 'You should now install project dependencies with _npm ' +
-//     'install_. After that, you may execute project tasks with _grunt_. For ' +
-//     'more information about installing and configuring Grunt, please see ' +
-//     'the Getting Started guide:' +
-//     '\n\n' +
-//     'http://gruntjs.com/getting-started';
+module.after = [];
+
+var projectAfter = [
+    'You should now install project dependencies with _npm install_.',
+    'After that, you may execute project tasks with _grunt_.',
+    'For more information about installing and configuring Grunt, please see the Getting Started guide:',
+    '',
+    'http://gruntjs.com/getting-started'
+];
 
 // Any existing file or directory matching this wildcard will cause a warning.
 var warnOn = module.warnOn = [];
