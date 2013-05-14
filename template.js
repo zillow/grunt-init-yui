@@ -71,6 +71,27 @@ exports.template = function (grunt, init, done) {
     // Gruntfile.js is missing
     var needsProject = projectOnly || grunt.file.expand('Gruntfile.js').length === 0;
 
+    if (projectOnly) {
+        // templating a project only
+        module.notes.push(projectNotes);
+        module.notes.push(moreInfoNotes);
+        module.after.push(projectAfter);
+    } else if (needsProject) {
+        // templating a module, but need a project too.
+        module.notes.push(projectNotes);
+        module.notes.push(moduleNotes);
+        module.notes.push(moreInfoNotes);
+        module.after.push(projectAfter);
+    } else {
+        // templating a module only
+        module.notes.push(moduleNotes);
+        module.notes.push(moreInfoNotes);
+    }
+
+    module.notes = grunt.util._.flatten(module.notes);
+    module.after = grunt.util._.flatten(module.after);
+
+
     function wrapDefault(oldKey, newKey, metaObj) {
         metaObj.name = newKey;
         return grunt.util._.defaults(metaObj, init.prompts[oldKey]);
