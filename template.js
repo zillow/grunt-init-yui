@@ -285,11 +285,12 @@ exports.template = function (grunt, init, done) {
 
     var templatePrompts = [];
     if (needsProject) {
-        templatePrompts = getProjectPrompts();
+        templatePrompts.push(getProjectPrompts());
     }
     if (!projectOnly) {
-        templatePrompts = templatePrompts.concat(getModulePrompts());
+        templatePrompts.push(getModulePrompts());
     }
+    templatePrompts = grunt.util._.flatten(templatePrompts);
 
 
     // Gets the ball rolling, finally.
