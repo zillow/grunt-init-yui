@@ -249,8 +249,10 @@ exports.template = function (grunt, init, done) {
     }
 
     function addProjectFiles(files, props) {
-        // Add properly-named license files.
-        init.addLicenseFiles(files, props.licenses);
+        if (props.licenses.length && props.licenses[0] !== 'none') {
+            // Add properly-named license files.
+            init.addLicenseFiles(files, props.licenses);
+        }
 
         // Generate package.json file, used by npm and grunt.
         init.writePackageJSON('package.json', props, function (pkg, props) {
