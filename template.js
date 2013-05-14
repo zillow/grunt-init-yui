@@ -43,7 +43,7 @@ var warnOn = module.warnOn = [];
     var load = key === 'warnOn'
         ? function () { return module[key]; }
         : function () { return module[key].join('\n'); };
-    exports.__defineGetter__(key, load);
+    Object.defineProperty(exports, key, { get: load });
 });
 
 // The actual init template.
