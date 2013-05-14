@@ -156,6 +156,15 @@ exports.template = function (grunt, init, done) {
         // Stringify build.json and meta/{name}.json contents
         props.build_json = JSON.stringify(build, null, 4);
         props.meta_json = JSON.stringify(meta, null, 4);
+
+        // filter out project-specific files when templating module only
+        if (!props.hasOwnProperty('yui_release')) {
+            Object.keys(renames).forEach(function (key) {
+                if (key.indexOf('_project') > -1) {
+                    renames[key] = false;
+                }
+            });
+        }
     }
 
 
