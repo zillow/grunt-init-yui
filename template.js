@@ -314,6 +314,11 @@ exports.template = function (grunt, init, done) {
     templatePrompts = grunt.util._.flatten(templatePrompts);
 
 
+    // since grunt-init has already tried to find
+    // the empty exports.notes, log it here
+    grunt.log.subhead('"yui" template notes:').writelns(exports.notes);
+
+
     // Gets the ball rolling, finally.
     init.process(templatePrompts, function (err, props) {
         if (needsProject) {
