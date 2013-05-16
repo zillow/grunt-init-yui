@@ -6,6 +6,7 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 
 // devDependencies
+var glob = require('glob');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 
