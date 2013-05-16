@@ -250,8 +250,15 @@ exports.template = function (grunt, init, done) {
                     done(null, (/n/i).test(value));
                 }
             },
-            init.prompt('copyright_owner', 'Yahoo! Inc.'),
-            init.prompt('yui_version', '~3.10.0')
+            {
+                name: 'copyright_owner',
+                message: 'Copyright owner',
+                'default': 'Yahoo! Inc.'
+            },
+            wrapDefault('version', 'yui_version', {
+                message: 'YUI version',
+                'default': '3.10.0'
+            })
         ];
     }
 
