@@ -293,7 +293,8 @@ exports.template = function (grunt, init, done) {
             // because init.filesToCopy() has already run
             Object.keys(files).forEach(function (outPath) {
                 var srcPath = files[outPath];
-                if (srcPath.indexOf('_project') === -1) {
+                if (srcPath.indexOf('_project') === -1 &&
+                    srcPath.indexOf('licenses') !== 0) {
                     delete files[outPath];
                 }
             });
