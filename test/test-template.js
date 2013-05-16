@@ -18,6 +18,31 @@ var OUTPUT_DIR = __dirname + '/template-output';
 var TEMPLATE   = path.resolve(__dirname, '..'); // grunt-init <path/to/template>
 var GRUNT_INIT = path.join(TEMPLATE, 'node_modules/grunt-init/bin/grunt-init');
 
+var EXPECTED_FILES = [
+    "BUILD.md",
+    "Gruntfile.js",
+    "LICENSE-MIT",
+    "README.md",
+    "package.json",
+    "src",
+    "src/template-output",
+    "src/template-output/HISTORY.md",
+    "src/template-output/README.md",
+    "src/template-output/build.json",
+    "src/template-output/docs",
+    "src/template-output/docs/component.json",
+    "src/template-output/docs/index.mustache",
+    "src/template-output/js",
+    "src/template-output/js/template-output.js",
+    "src/template-output/meta",
+    "src/template-output/meta/template-output.json",
+    "src/template-output/tests",
+    "src/template-output/tests/unit",
+    "src/template-output/tests/unit/assets",
+    "src/template-output/tests/unit/assets/template-output-test.js",
+    "src/template-output/tests/unit/index.html"
+];
+
 describe("templating", function () {
     this.slow('5s');
 
@@ -40,6 +65,7 @@ describe("templating", function () {
             child.stdout.on('data', defaultPrompts(child));
 
             child.on('close', function (code) {
+                filesCreated().should.eql(EXPECTED_FILES);
                 done();
             });
         });
@@ -50,6 +76,12 @@ describe("templating", function () {
     });
 
     describe("project only", function () {
+        before(function (done) {
+            rimraf(OUTPUT_DIR, function () {
+                mkdirp(OUTPUT_DIR, done);
+            });
+        });
+
         it("should not output module content", function (done) {
             var child = spawn(GRUNT_INIT, [TEMPLATE, '--project'], {
                 cwd: OUTPUT_DIR,
@@ -60,10 +92,15 @@ describe("templating", function () {
             child.stdout.on('data', defaultPrompts(child));
 
             child.on('close', function (code) {
+                filesCreated().should.eql(EXPECTED_FILES.slice(0, 5));
                 done();
             });
         });
     });
+
+    function filesCreated(pattern) {
+        return glob.sync(pattern || '**/*', { cwd: OUTPUT_DIR });
+    }
 
     function defaultPrompts(child) {
         return function (data) {
