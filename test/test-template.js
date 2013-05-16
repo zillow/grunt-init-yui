@@ -49,7 +49,19 @@ describe("templating", function () {
     });
 
     describe("project only", function () {
-        it("should not output module content");
+        it("should not output module content", function (done) {
+            var child = spawn(GRUNT_INIT, [TEMPLATE, '--project'], {
+                cwd: OUTPUT_DIR,
+                stdio: 'pipe'
+            });
+
+            child.stdout.setEncoding('utf8');
+            child.stdout.on('data', defaultPrompts(child));
+
+            child.on('close', function (code) {
+                done();
+            });
+        });
     });
 
     function defaultPrompts(child) {

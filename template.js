@@ -287,6 +287,18 @@ exports.template = function (grunt, init, done) {
             init.addLicenseFiles(files, props.licenses);
         }
 
+        // filter out module-specific files when templating project only
+        if (!props.hasOwnProperty('title')) {
+            // iterate over files instead of init.renames
+            // because init.filesToCopy() has already run
+            Object.keys(files).forEach(function (outPath) {
+                var srcPath = files[outPath];
+                if (srcPath.indexOf('_project') === -1) {
+                    delete files[outPath];
+                }
+            });
+        }
+
         // Generate package.json file, used by npm and grunt.
         init.writePackageJSON('package.json', props, function (pkg, props) {
             // `project_*`
