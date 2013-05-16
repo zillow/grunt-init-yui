@@ -18,7 +18,7 @@ var TEMPLATE   = path.resolve(__dirname, '..'); // grunt-init <path/to/template>
 var GRUNT_INIT = path.join(TEMPLATE, 'node_modules/grunt-init/bin/grunt-init');
 
 describe("templating", function () {
-    this.timeout(0);
+    this.slow('5s');
 
     before(function (done) {
         mkdirp(OUTPUT_DIR, done);
