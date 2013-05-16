@@ -36,15 +36,7 @@ describe("templating", function () {
             });
 
             child.stdout.setEncoding('utf8');
-            child.stdout.on('data', function (data) {
-                // start of a prompt "[?]"
-                if (data.indexOf('[') === 0) {
-                    // send newline to accept defaults
-                    process.nextTick(function () {
-                        child.stdin.write('\n');
-                    });
-                }
-            });
+            child.stdout.on('data', defaultPrompts(child));
 
             child.on('close', function (code) {
                 done();
@@ -59,4 +51,16 @@ describe("templating", function () {
     describe("project only", function () {
         it("should not output module content");
     });
+
+    function defaultPrompts(child) {
+        return function (data) {
+            // start of a prompt "[?]"
+            if (data.indexOf('[') === 0) {
+                // send newline to accept defaults
+                process.nextTick(function () {
+                    child.stdin.write('\n');
+                });
+            }
+        };
+    }
 });
