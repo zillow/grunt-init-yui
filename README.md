@@ -6,29 +6,46 @@
 
 ## Installation
 
-If you haven't already done so, install [grunt-init][].
-Due to a bug in the core repo, we're using a fixed fork for the time being.
+Install `grunt-init-yui` globally via `npm`.
 
 ```bash
-npm -g install git://github.com/neekey/grunt-init.git
+npm -g install grunt-init-yui
 ```
-
-Once grunt-init is installed, place this template in your `~/.grunt-init/` directory. It's recommended that you use git to clone this template into that directory, as follows:
-
-```bash
-git clone git@github.com:gruntjs/grunt-init-yui.git ~/.grunt-init/yui
-```
-
-_(Windows users, see [the documentation][grunt-init] for the correct destination directory path)_
 
 ## Usage
 
 At the command-line, cd into an empty directory, run this command and follow the prompts.
 
 ```
-grunt-init yui
+grunt-init-yui
 ```
 
 If a YUI-based project does not exist yet, it will create one.
+An initialized module is placed under `src/{moduleName}` in the current directory.
 
-_Note that this template will generate files in the current directory, so be sure to change to a new directory first if you don't want to overwrite existing files._
+_Note that this template will generate files in the current directory,so be sure to change to a new directory first if you don't want to overwrite existing files._
+
+### Options
+
+```text
+  --project       Only initialize a project, not a module.
+  --gallery       The module initialized will live in the gallery.
+
+  --no-color      Disables color output.
+  --no-write      Disables writing files (dry run).
+  -f, --force     Ignore warnings. Caveat emptor.
+  -v, --version   Print version and exit.
+```
+
+### Directory Structure
+
+When initializing a module or project, it is helpful (but by no means required) to already have a Git repo initialized:
+
+```bash
+mkdir project
+cd project
+git init .
+```
+
+
+
