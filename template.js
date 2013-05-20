@@ -105,7 +105,15 @@ exports.template = function (grunt, init, done) {
                 // disambiguates name from project_name
                 message: 'Module name'
             }),
-            init.prompt('type', 'js'),
+            {
+                name: 'module_type',
+                message: 'Module type [js, css, widget]',
+                'default': 'js',
+                validator: /^(js|css|widget)$/i,
+                sanitize: function (value, data, done) {
+                    done(null, String(value).toLowerCase());
+                }
+            },
             init.prompt('title'),
             init.prompt('description', 'The best YUI module ever.')
         ];
@@ -128,7 +136,7 @@ exports.template = function (grunt, init, done) {
         // Change renames according to type (js, css, or widget)
         var renames = init.renames;
 
-        switch (props.type) {
+        switch (props.module_type) {
         case 'js':
             // don't copy css/
             renames['css/name.css'] = false;
