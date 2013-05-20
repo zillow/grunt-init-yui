@@ -147,7 +147,6 @@ exports.template = function (grunt, init, done) {
             // don't copy assets/
             renames['assets/name/skins/sam/name-skin.css'] = false;
             renames['assets/name/skins/night/name-skin.css'] = false;
-            // renames['assets/name/skins/*/name-skin.css'] = false;
             renames['assets/name/name-core.css'] = false;
 
             // default requires
@@ -161,6 +160,11 @@ exports.template = function (grunt, init, done) {
         case 'css':
             // don't copy js/
             renames['js/name.js'] = false;
+
+            // don't copy assets/
+            renames['assets/name/skins/sam/name-skin.css'] = false;
+            renames['assets/name/skins/night/name-skin.css'] = false;
+            renames['assets/name/name-core.css'] = false;
 
             // don't copy tests/
             renames['tests/unit/assets/name-test.js'] = false;
