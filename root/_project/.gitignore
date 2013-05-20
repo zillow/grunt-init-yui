@@ -1,4 +1,4 @@
-node_modules/
-build/
+node_modules/{% if (clean_build) { %}
+build/{% } %}
 coverage/
 release/

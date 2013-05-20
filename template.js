@@ -262,7 +262,7 @@ exports.template = function (grunt, init, done) {
                 'default': 'Y/n',
                 sanitize: function (value, data, done) {
                     // inverted default
-                    done(null, (/n/i).test(value));
+                    done(null, !(/y/i).test(value));
                 }
             },
             {

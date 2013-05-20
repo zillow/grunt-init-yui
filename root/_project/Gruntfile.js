@@ -90,8 +90,7 @@ module.exports = function (grunt) {
         }{% } %}
     });
 {% if (clean_build) { %}
-    grunt.loadNpmTasks('grunt-contrib-clean');
-{% } %}{% if (yui_release) { %}
+    grunt.loadNpmTasks('grunt-contrib-clean');{% } %}{% if (yui_release) { %}
     grunt.loadNpmTasks('grunt-contrib-compress');{% } %}
     grunt.loadNpmTasks('grunt-yui-contrib');
 
