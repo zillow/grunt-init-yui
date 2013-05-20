@@ -114,7 +114,10 @@ exports.template = function (grunt, init, done) {
                     done(null, String(value).toLowerCase());
                 }
             },
-            init.prompt('title'),
+            wrapDefault('title', 'title', {
+                // disambiguates title from project_title
+                message: 'Module title'
+            }),
             init.prompt('description', 'The best YUI module ever.')
         ];
     }
