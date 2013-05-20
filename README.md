@@ -47,5 +47,94 @@ cd project
 git init .
 ```
 
+#### Project Root
 
+```text
+project/
+ ├── BUILD.md
+ ├── Gruntfile.js
+ ├── LICENSE-MIT
+ ├── README.md
+ └── package.json
+```
 
+#### JS Module
+
+This is the default module type, and is by far the most common across the core library.
+
+```text
+ project/
+ └─┬ src/
+   └─┬ js-module/
+     ├── HISTORY.md
+     ├── README.md
+     ├── build.json
+     ├─┬ docs/
+     │ ├── component.json
+     │ └── index.mustache
+     ├─┬ js/
+     │ └── js-module.js
+     ├─┬ meta/
+     │ └── js-module.json
+     └─┬ tests/
+       └─┬ unit/
+         ├── index.html
+         └─┬ assets/
+           └── js-module-test.js
+```
+
+#### CSS Module
+
+A CSS module contains a `css` directory instead of `js`, and is otherwise remarkably similar to a JS module.
+
+```text
+ project/
+ └─┬ src/
+   └─┬ css-module/
+     ├── HISTORY.md
+     ├── README.md
+     ├── build.json
+     ├─┬ css/
+     │ └── css-module.css
+     ├─┬ docs/
+     │ ├── component.json
+     │ └── index.mustache
+     ├─┬ meta/
+     │ └── css-module.json
+     └─┬ tests/
+       └─┬ unit/
+         └── index.html
+```
+
+#### Widget Module
+
+The output of the `widget` type is identical to `js`, with the addition of an `assets` folder containing core and skin CSS files. The metadata is also modified to require `widget` and sets the `skinnable` property to `true`.
+
+```text
+ project/
+ └─┬ src/
+   └─┬ widget-module/
+     ├── HISTORY.md
+     ├── README.md
+     ├── build.json
+     ├─┬ assets/
+     │ └─┬ widget-module/
+     │   ├── widget-module-core.css
+     │   └─┬ skins/
+     │     ├─┬ night/
+     │     │ └── widget-module-skin.css
+     │     └─┬ sam/
+     │       └── widget-module-skin.css
+     ├─┬ docs/
+     │ ├── component.json
+     │ └── index.mustache
+     ├─┬ js/
+     │ └── widget-module.js
+     ├─┬ meta/
+     │ └── widget-module.json
+     └─┬ tests/
+       └─┬ unit/
+         ├── index.html
+         └─┬ assets/
+           └── widget-module-test.js
+```
