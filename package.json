@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "description": "Create a YUI module with grunt-init.",
   "main": "template.js",
+  "bin": "bin/cli.js",
+  "preferGlobal": true,
   "scripts": {
     "test": "mocha"
   },
