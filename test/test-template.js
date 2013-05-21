@@ -62,7 +62,7 @@ describe("templating", function () {
             });
 
             child.stdout.setEncoding('utf8');
-            child.stdout.on('data', defaultPrompts(child));
+            child.stdout.on('data', answerPrompts(child));
 
             child.on('close', function (code) {
                 filesCreated().should.eql(EXPECTED_FILES);
@@ -89,7 +89,7 @@ describe("templating", function () {
             });
 
             child.stdout.setEncoding('utf8');
-            child.stdout.on('data', defaultPrompts(child));
+            child.stdout.on('data', answerPrompts(child));
 
             child.on('close', function (code) {
                 filesCreated().should.eql(EXPECTED_FILES.slice(0, 5));
@@ -97,20 +97,50 @@ describe("templating", function () {
             });
         });
     });
-
-    function filesCreated(pattern) {
-        return glob.sync(pattern || '**/*', { cwd: OUTPUT_DIR });
-    }
-
-    function defaultPrompts(child) {
-        return function (data) {
-            // start of a prompt "[?]"
-            if (data.indexOf('[') === 0) {
-                // send newline to accept defaults
-                process.nextTick(function () {
-                    child.stdin.write('\n');
-                });
-            }
-        };
-    }
 });
+
+function filesCreated(pattern) {
+    return glob.sync(pattern || '**/*', { cwd: OUTPUT_DIR });
+}
+
+/**
+Returns the "Project name" part of a "[?] Project name (foo)"
+shell-escaped color prompt string.
+
+@method getMessage
+@param {String} prompt
+@return {String}
+**/
+function getMessage(prompt) {
+    var mStarts = prompt.indexOf('\u001b[90m') + 5;
+    var mFinish = prompt.indexOf('\u001b[39m', mStarts);
+    return prompt.substring(mStarts, mFinish);
+}
+
+/**
+Answer the prompts via writing to a child's stdin.
+
+If an answers object is provided, keys matching the
+prompt's "message" property will answer thusly.
+
+When no answer matches (or none is provided), the
+default is accepted.
+
+@method answerPrompts
+@param {ChildProcess} child
+@param {Object} [answers]
+**/
+function answerPrompts(child, answers) {
+    answers = answers || {};
+    return function (data) {
+        var message,
+            prompt = data.indexOf('[\u001b[32m?') === 0;
+        // start of a prompt "[?]"
+        if (prompt) {
+            // send matching answer, or newline to accept default
+            process.nextTick(function () {
+                child.stdin.write((answers[getMessage(data)] || '') + '\n');
+            });
+        }
+    };
+}
