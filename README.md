@@ -1,4 +1,4 @@
-# grunt-init-yui [![Build Status](https://travis-ci.org/evocateur/grunt-init-yui.png)](https://travis-ci.org/evocateur/grunt-init-yui)
+# grunt-init-yui [![Build Status](https://travis-ci.org/zillow/grunt-init-yui.png)](https://travis-ci.org/zillow/grunt-init-yui)
 
 > Create a YUI module with [grunt-init][], including YUITest unit tests and Istanbul code coverage.
 
