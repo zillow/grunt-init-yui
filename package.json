@@ -1,6 +1,6 @@
 {
   "name": "grunt-init-yui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a YUI module with grunt-init.",
   "main": "template.js",
   "bin": "bin/cli.js",
