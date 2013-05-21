@@ -96,6 +96,36 @@ describe("templating", function () {
                 done();
             });
         });
+
+        describe("with unversioned build directory", function () {
+            before(function (done) {
+                var child = spawn(GRUNT_INIT, [TEMPLATE, '--project', '--force'], {
+                    cwd: OUTPUT_DIR,
+                    stdio: 'pipe'
+                });
+
+                child.stdout.setEncoding('utf8');
+                child.stdout.on('data', answerPrompts(child, {
+                    'Version build directory?': 'n'
+                }));
+
+                child.on('close', function (code) {
+                    done();
+                });
+            });
+
+            it("should include build/ in .gitignore", function () {
+                var ignores = fs.readFileSync(path.join(OUTPUT_DIR, '.gitignore'), 'utf8');
+
+                ignores.should.equal([
+                    'node_modules/',
+                    'build/',
+                    'coverage/',
+                    'release/',
+                    ''
+                ].join('\n'));
+            });
+        });
     });
 });
 
