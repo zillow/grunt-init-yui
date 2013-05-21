@@ -58,6 +58,8 @@ project/
  └── package.json
 ```
 
+After a project is initialized, you should `npm install .` to get the tools used by Grunt.
+
 #### JS Module
 
 This is the default module type, and is by far the most common across the core library.
