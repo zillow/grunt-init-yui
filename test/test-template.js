@@ -82,18 +82,48 @@ describe("templating", function () {
             });
         });
 
-        it("should not output module content", function (done) {
-            var child = spawn(GRUNT_INIT, [TEMPLATE, '--project'], {
-                cwd: OUTPUT_DIR,
-                stdio: 'pipe'
+        describe("defaulting all prompts", function () {
+            before(function (done) {
+                var child = spawn(GRUNT_INIT, [TEMPLATE, '--project'], {
+                    cwd: OUTPUT_DIR,
+                    stdio: 'pipe'
+                });
+
+                child.stdout.setEncoding('utf8');
+                child.stdout.on('data', answerPrompts(child));
+
+                child.on('close', function (code) {
+                    done();
+                });
             });
 
-            child.stdout.setEncoding('utf8');
-            child.stdout.on('data', answerPrompts(child));
-
-            child.on('close', function (code) {
+            it("should not output module content", function () {
                 filesCreated().should.eql(EXPECTED_FILES.slice(0, 5));
-                done();
+            });
+
+            it("should exclude build/ from .gitignore", function () {
+                var ignores = fs.readFileSync(path.join(OUTPUT_DIR, '.gitignore'), 'utf8');
+
+                ignores.should.equal([
+                    'node_modules/',
+                    'coverage/',
+                    'release/',
+                    ''
+                ].join('\n'));
+            });
+
+            it("should exclude grunt-contrib-clean from devDependencies", function () {
+                var packageJSON = fs.readFileSync(path.join(OUTPUT_DIR, 'package.json'), 'utf8');
+                packageJSON = JSON.parse(packageJSON);
+
+                packageJSON.should.have.property('devDependencies');
+                packageJSON.devDependencies.should.not.have.property('grunt-contrib-clean');
+            });
+
+            it("should not load npm tasks for grunt-contrib-clean", function () {
+                var gruntfile = fs.readFileSync(path.join(OUTPUT_DIR, 'Gruntfile.js'), 'utf8');
+
+                gruntfile.indexOf('grunt-contrib-clean').should.be.below(0);
             });
         });
 
@@ -127,7 +157,8 @@ describe("templating", function () {
             });
 
             it("should include grunt-contrib-clean in devDependencies", function () {
-                var packageJSON = require(path.join(OUTPUT_DIR, 'package.json'));
+                var packageJSON = fs.readFileSync(path.join(OUTPUT_DIR, 'package.json'), 'utf8');
+                packageJSON = JSON.parse(packageJSON);
 
                 packageJSON.should.have.property('devDependencies');
                 packageJSON.devDependencies.should.have.property('grunt-contrib-clean');
