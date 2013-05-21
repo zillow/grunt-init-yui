@@ -125,6 +125,19 @@ describe("templating", function () {
                     ''
                 ].join('\n'));
             });
+
+            it("should include grunt-contrib-clean in devDependencies", function () {
+                var packageJSON = require(path.join(OUTPUT_DIR, 'package.json'));
+
+                packageJSON.should.have.property('devDependencies');
+                packageJSON.devDependencies.should.have.property('grunt-contrib-clean');
+            });
+
+            it("should load npm tasks for grunt-contrib-clean", function () {
+                var gruntfile = fs.readFileSync(path.join(OUTPUT_DIR, 'Gruntfile.js'), 'utf8');
+
+                gruntfile.indexOf('grunt-contrib-clean').should.be.above(0);
+            });
         });
     });
 });
